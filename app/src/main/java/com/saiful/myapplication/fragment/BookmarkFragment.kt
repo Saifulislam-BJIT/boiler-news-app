@@ -1,11 +1,13 @@
 package com.saiful.myapplication.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.saiful.myapplication.R
+import com.saiful.myapplication.global.Constant
 
 
 class BookmarkFragment : Fragment() {
@@ -19,5 +21,10 @@ class BookmarkFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_bookmark, container, false)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        Log.d("TAG", "Bookmark Fragment Created-> ${Constant.category}")
+        Constant.category = "Bookmark"
+        Log.d("TAG", "Bookmark Fragment -> ${Constant.category}")
+    }
 }

@@ -1,17 +1,20 @@
 package com.saiful.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.saiful.myapplication.adapter.TabAdapter
 import com.saiful.myapplication.adapter.TabAdapter.Companion.tabList
 import com.saiful.myapplication.databinding.FragmentMainBinding
 import com.saiful.myapplication.fragment.BookmarkFragment
+import com.saiful.myapplication.global.Constant
 
 
 class MainFragment : Fragment() {
@@ -38,6 +41,23 @@ class MainFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPage) {
             tab, position -> tab.text = tabList[position].title
         }.attach()
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                // Handle tab select
+                val position = tab?.position ?: 0
+                Log.d("TAG", "onTabSelected: ${tabList[position].title}")
+                Constant.category = tabList[position].title
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
 
 //        setHasOptionsMenu(true)
         val menuHost: MenuHost = requireActivity()
